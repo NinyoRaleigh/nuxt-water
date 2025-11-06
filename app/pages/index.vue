@@ -3,8 +3,9 @@ const name = ref('')
 const email = ref('')
 const password = ref('')
 
-function add() {
-  $fetch('/api/users', {
+async function add() {
+  try {
+  await $fetch('/api/users', {
     method: 'POST',
     body: {
       name: name.value,
@@ -12,6 +13,9 @@ function add() {
       password: password.value
     }
   })
+} catch (error) {
+  console.log(error);
+}
 }
 
 </script>
