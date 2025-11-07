@@ -5,14 +5,13 @@ const password = ref('')
 
 async function add() {
   try {
-  await $fetch('/api/users', {
+  await $fetch('/api/fruits', {
     method: 'POST',
     body: {
       name: name.value,
-      email: email.value,
-      password: password.value
     }
   })
+  
 } catch (error) {
   console.log(error);
 }
@@ -25,13 +24,18 @@ async function add() {
    </div>
 
   <div class=" flex justify-center items-center mt-50">
-    <div class="space-y-5">
+    <!-- <div class="space-y-5">
       <Label>Username</Label>
       <Input v-model="name" class="w-100" />
       <Label>Email</Label>
       <Input v-model="email" class="w-100" />
       <Label>Password</Label>
       <Input v-model="password" class="w-100" />
+      <Button @click="add">Add</Button>
+    </div> -->
+    <div class="space-y-5">
+      <Label>Fruit</Label>
+      <Input v-model="name" class="w-100"/>
       <Button @click="add">Add</Button>
     </div>
 
