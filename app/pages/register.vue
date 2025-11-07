@@ -37,7 +37,9 @@ async function add() {
     });
 
     successMessage.value = 'User registered successfully!';
-    resetForm();
+    username.value = '';
+    password.value = '';
+
   } catch (error) {
     console.error(error);
   } finally {
@@ -45,10 +47,6 @@ async function add() {
   }
 }
 
-function resetForm() {
-  username.value = '';
-  password.value = '';
-}
 </script>
 
 <template>

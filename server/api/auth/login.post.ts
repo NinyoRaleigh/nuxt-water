@@ -14,7 +14,6 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // ✅ Query the database
   const user = await db
     .select()
     .from(register)

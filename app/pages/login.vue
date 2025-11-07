@@ -27,6 +27,9 @@ async function add() {
     successMessage.value = 'User logged in successfully!';
     username.value = '';
     password.value = '';
+
+
+    await navigateTo('/');
   } catch (error: any) {
     if (error?.statusCode === 409) {
       errorMessage.value = 'Username already exists.';
