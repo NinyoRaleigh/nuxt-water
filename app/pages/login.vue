@@ -10,13 +10,15 @@ const loading = ref(false);
 const errorMessage = ref('');
 const successMessage = ref('');
 
+const navbarRefreshKey = useState<number>("navbarRefreshKey", () => 0);
+
 async function add() {
   try {
     loading.value = true;
     errorMessage.value = '';
     successMessage.value = '';
 
-    await $fetch('/api/auth/login', {
+    const result =await $fetch('/api/auth/login', {
       method: 'post',
       body: {
         username: username.value,
@@ -28,8 +30,16 @@ async function add() {
     username.value = '';
     password.value = '';
 
+    if(!(result && result.token)){
+      errorMessage.value = "Login failed";
+      return;
+    }
+    
+    useCookie("jwt_token").value = result.token; 
+    navbarRefreshKey.value++;
+    await navigateTo("/dashboard")
 
-    await navigateTo('/');
+
   } catch (error: any) {
     if (error?.statusCode === 409) {
       errorMessage.value = 'Username already exists.';
@@ -40,10 +50,15 @@ async function add() {
   } finally {
     loading.value = false;
   }
+
+
 }
+
+  
 </script>
 
 <template>
+  <NuxtLayout name="nav-bar">
   <div class="p-20">
     <NuxtLink to="/dashboard">
       <Button>Dashboard</Button>
@@ -68,4 +83,5 @@ async function add() {
       <p v-if="successMessage" class="text-green-500 text-sm">{{ successMessage }}</p>
     </div>
   </div>
+  </NuxtLayout>
 </template>

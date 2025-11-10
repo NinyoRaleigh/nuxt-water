@@ -5,26 +5,29 @@ const password = ref('')
 
 async function add() {
   try {
-  await $fetch('/api/fruits', {
-    method: 'POST',
-    body: {
-      name: name.value,
-    }
-  })
-  
-} catch (error) {
-  console.log(error);
-}
+    await $fetch('/api/fruits', {
+      method: 'POST',
+      body: {
+        name: name.value,
+      }
+    })
+
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 </script>
 <template>
-   <div class="p-20">
-    <NuxtLink to="/dashboard"><Button>Dashboard</Button></NuxtLink>
-   </div>
 
-  <div class=" flex justify-center items-center mt-50">
-    <!-- <div class="space-y-5">
+  <NuxtLayout name="nav-bar">
+
+    <div class="p-20">
+      <NuxtLink to="/dashboard"><Button>Dashboard</Button></NuxtLink>
+    </div>
+
+    <div class=" flex justify-center items-center mt-50">
+      <!-- <div class="space-y-5">
       <Label>Username</Label>
       <Input v-model="name" class="w-100" />
       <Label>Email</Label>
@@ -33,16 +36,17 @@ async function add() {
       <Input v-model="password" class="w-100" />
       <Button @click="add">Add</Button>
     </div> -->
-    <div class="space-y-5">
-      <Label>Fruit</Label>
-      <Input v-model="name" class="w-100"/>
-      <Button @click="add">Add</Button>
+      <div class="space-y-5">
+        <Label>Fruit</Label>
+        <Input v-model="name" class="w-100" />
+        <Button @click="add">Add</Button>
+      </div>
+
+
+
+
+
+
     </div>
-
-   
-
-
-
-
-  </div>
+  </NuxtLayout>
 </template>

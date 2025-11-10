@@ -2,6 +2,7 @@ import { compare } from "bcrypt-ts";
 import { eq } from "drizzle-orm";
 import { db } from "~~/server/utils/db"; // ✅ import your actual db connection
 import { register } from "~~/server/database/schemas";
+import jwt from "jsonwebtoken";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -31,6 +32,11 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, message: 'Invalid credentials'});
 }
 
+  const token = jwt.sign({id: foundUser.id , username: foundUser.username}, process.env.JWT_PRIVATE!, {
+    algorithm: 'HS256',
+    expiresIn: '1m'
+  })
+
   // ✅ Return successful login
-  return { message: "Login successful", username: user[0].username };
+  return { token };
 });

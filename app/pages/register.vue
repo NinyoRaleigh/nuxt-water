@@ -50,29 +50,31 @@ async function add() {
 </script>
 
 <template>
-  <div class="p-20">
-    <NuxtLink to="/dashboard">
-      <Button>Dashboard</Button>
-    </NuxtLink>
-  </div>
-
-  <div class="flex justify-center items-center mt-50">
-    <div class="space-y-5 w-[300px]">
-      <form @submit.prevent="add">
-        <Label>Username</Label>
-        <Input v-model="username" class="w-full" />
-        <p v-if="errorName" class="text-red-500 text-sm">{{ errorName }}</p>
-
-        <Label class="mt-3 block">Password</Label>
-        <Input v-model="password" type="password" class="w-full" />
-        <p v-if="errorPassword" class="text-red-500 text-sm">{{ errorPassword }}</p>
-
-        <Button type="submit" class="mt-5 w-full" :disabled="loading">
-          {{ loading ? 'Registering...' : 'Add' }}
-        </Button>
-      </form>
-
-      <p v-if="successMessage" class="text-green-500 text-sm">{{ successMessage }}</p>
+  <NuxtLayout name="nav-bar">
+    <div class="p-20">
+      <NuxtLink to="/dashboard">
+        <Button>Dashboard</Button>
+      </NuxtLink>
     </div>
-  </div>
+
+    <div class="flex justify-center items-center mt-50">
+      <div class="space-y-5 w-[300px]">
+        <form @submit.prevent="add">
+          <Label>Username</Label>
+          <Input v-model="username" class="w-full" />
+          <p v-if="errorName" class="text-red-500 text-sm">{{ errorName }}</p>
+
+          <Label class="mt-3 block">Password</Label>
+          <Input v-model="password" type="password" class="w-full" />
+          <p v-if="errorPassword" class="text-red-500 text-sm">{{ errorPassword }}</p>
+
+          <Button type="submit" class="mt-5 w-full" :disabled="loading">
+            {{ loading ? 'Registering...' : 'Add' }}
+          </Button>
+        </form>
+
+        <p v-if="successMessage" class="text-green-500 text-sm">{{ successMessage }}</p>
+      </div>
+    </div>
+  </NuxtLayout>
 </template>
