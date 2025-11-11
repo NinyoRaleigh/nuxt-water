@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware((to, from) => {
   const token = useCookie("jwt_token").value;
 
   // Skip check for public pages
@@ -23,4 +23,7 @@ export default defineNuxtRouteMiddleware((to) => {
     useCookie("jwt_token").value = null;
     return navigateTo("/login");
   }
+  console.log(to);
+  console.log(from);
+
 });

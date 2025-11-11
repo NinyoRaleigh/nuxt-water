@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
 
   const token = jwt.sign({id: foundUser.id , username: foundUser.username}, process.env.JWT_PRIVATE!, {
     algorithm: 'HS256',
-    expiresIn: '1m'
+    expiresIn: '10s'
   })
 
   // ✅ Return successful login

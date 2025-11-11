@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const hashedPassword = await hash(password, 8);
+  const hashedPassword = await hash(password, 10);
 
   await db.insert(register).values({
     username: username,
